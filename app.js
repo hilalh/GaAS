@@ -17,10 +17,11 @@ var client = new twilio.RestClient(config.AcSid,config.authToken)
 app.post('/incoming', function(request, response) {
     var message = request.body.Body;
     var from = request.body.From;
-    result = processedMessage(message)
+    //result = processedMessage(message)
+    result = "Hello"
     sys.log('From: ' + from + ', Message: ' + message);
 
-    response.send(processedMessage(message),{'Content-Type':'text/xml'}, 200);
+    response.send(result,{'Content-Type':'text/xml'}, 200);
 });
 
 http.createServer(app).listen(app.get('port'), function() {    console.log("Node app is running at localhost:" + app.get('port'))  })
