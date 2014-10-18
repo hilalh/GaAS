@@ -17,7 +17,7 @@ var client = new twilio.RestClient(config.AcSid,config.authToken)
 app.post('/incoming', function(request, response) {
     var message = request.body.Body;
     var from = request.body.From;
-    result = processedMessage
+    result = processedMessage(message)
     sys.log('From: ' + from + ', Message: ' + message);
 
     response.send(processedMessage(message),{'Content-Type':'text/xml'}, 200);
