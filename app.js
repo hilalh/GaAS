@@ -3,12 +3,15 @@ var express = require('express')
     var sys = require('sys');
     var twilio = require('twilio')
     var config = require('./config')
-var app = express();
+    var bodyParser = require('body-parser');
+
+    var app = express();
 var client = new twilio.RestClient(config.AcSid,config.authToken)
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
  app.set('port', (process.env.PORT || 5000))
- app.use(express.static(__dirname + '/public'))
-
  app.get('/', function(request, response) {
    response.send('Hello World LOLBro!')
  });
@@ -18,10 +21,9 @@ app.post('/incoming', function(request, response) {
     var message = request.body.Body;
     var from = request.body.From;
     //result = processedMessage(message)
-    result = "Hello"
     sys.log('From: ' + from + ', Message: ' + message);
-
-    response.send(result,{'Content-Type':'text/xml'}, 200);
+    var twiml = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'+message+'</Message></Response>';
+    response.send(twiml,{'Content-Type':'text/xml'}, 200);
 });
 
 http.createServer(app).listen(app.get('port'), function() {    console.log("Node app is running at localhost:" + app.get('port'))  })
