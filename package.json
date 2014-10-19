@@ -10,7 +10,7 @@
     "express": "~4.9.x",
     "twilio": "1.7.x",
     "restler": "3.2.x",
-    "body-parser"
+    "body-parser": "1.9.x" 
   },
   "engines": {
     "node": "0.10.x"
