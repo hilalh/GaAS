@@ -29,10 +29,18 @@ app.post('/incoming', function(request, response) {
 
 http.createServer(app).listen(app.get('port'), function() {    console.log("Node app is running at localhost:" + app.get('port'))  })
 
+
+function holdAndWait(message,callback){
+    callback(querySongs.getLyrics(message));
+}
 function processMessage(message){
     querySongs = require('./getlyrics.js')
     var temp = message
-    var result = querySongs.getLyrics(temp)
+    holdAndWait(message,function(){
+        result = "Meh"
+        var twiml = '<?xml version="1.0" encoding="UTF-8" ?>n<Response>n<Message>'+result+'</Message>n</Response>';
+        return twiml;
+    })
     //var oStr = message.slice(0,3)
     //var result = "Sorry, couldn't process your request"
     //temp = temp(oStr+' ', '')
@@ -44,6 +52,5 @@ function processMessage(message){
         //result = 'Lyrics'
         //querySongs.getLyrics(temp)
     //}
-    var twiml = '<?xml version="1.0" encoding="UTF-8" ?>n<Response>n<Message>'+result+'</Message>n</Response>';
-    return twiml;
+    //
 }
