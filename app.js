@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/incoming', function(request, response) {
     var message = request.body.Body;
+    message = processMessage(message)
     var from = request.body.From;
     //result = processedMessage(message)
     sys.log('From: ' + from + ', Message: ' + message);
@@ -31,17 +32,18 @@ http.createServer(app).listen(app.get('port'), function() {    console.log("Node
 function processMessage(message){
     querySongs = require('./getlyrics.js')
     var temp = message
-    var oStr = message.slice(0,3)
-    var result = "Sorry, couldn't process your request"
-    temp = temp(oStr+' ', '')
-    if (oStr.localeCompare('(l)')){
-        result = 'Name'
-        //querySongs.getName(temp)
-    }
-    else if (oStr.localeCompare('(n)')){
-        result = 'Lyrics'
+    var result = querySongs.getLyrics(temp)
+    //var oStr = message.slice(0,3)
+    //var result = "Sorry, couldn't process your request"
+    //temp = temp(oStr+' ', '')
+    //if (oStr.localeCompare('(l)')){
+        //result = 'Name'
+        ////querySongs.getName(temp)
+    //}
+    //else if (oStr.localeCompare('(n)')){
+        //result = 'Lyrics'
         //querySongs.getLyrics(temp)
-    }
+    //}
     var twiml = '<?xml version="1.0" encoding="UTF-8" ?>n<Response>n<Message>'+result+'</Message>n</Response>';
     return twiml;
 }
