@@ -9,14 +9,17 @@
   "dependencies": {
     "express": "~4.9.x",
     "twilio": "1.7.x",
-    "restler": "3.2.x"
+    "restler": "3.2.x",
+    "body-parser": "1.9.x",
+    "superagent": "0.20.x",
+    "cheerio": "0.17.x"
   },
   "engines": {
     "node": "0.10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "http://github.com/textream/gaas"
   },
   "keywords": [
     "node",
