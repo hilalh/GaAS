@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+ruby '2.1.2'
+gem 'rapgenius'
+gem 'sinatra'
+gem 'rack'
+gem 'soundcloud'
+gem 'twilio-ruby'
+gem 'youtube_search'
